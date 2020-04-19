@@ -12,6 +12,15 @@
     <description>learning-plan</description>
     <url>https://github.com/w304807481/learning-plans</url>
 
+    <modules>
+        <module>language-base</module>
+        <module>framework</module>
+        <module>database</module>
+        <module>middleware</module>
+        <module>arch-design</module>
+        <module>tools</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -176,7 +185,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--gpg加密插件-->
+            <!--gpg加密插件
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
@@ -190,6 +199,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
         </plugins>
     </build>
 </project>
