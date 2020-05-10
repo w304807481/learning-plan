@@ -1,19 +1,28 @@
 package com.github.opensharing.archdesign.pattern.factory.staticfactory;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
+ * 小汽车
  * @author jwen
  */
 public class Car implements Movable {
-    private static Movable car = new Car();
-    private static List<Car> cars = new ArrayList<Car>();
 
+    /**
+     * 1.饿汉式单例：先创建，牺牲内存换取安全
+     */
+    private static Movable car = new Car();
+
+    /**
+     * 2.对外屏蔽构造方法
+     */
     private Car() {
     }
 
+    /**
+     * 3. 提供工厂方法
+     *
+     * @return
+     */
     public static Movable getInstance() {
         return car;
     }
