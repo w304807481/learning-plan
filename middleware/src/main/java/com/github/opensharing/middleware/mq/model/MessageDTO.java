@@ -1,30 +1,25 @@
 package com.github.opensharing.middleware.mq.model;
 
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * 消息传输对象
  *
  * @author wenzongwei
  * Date 2020-06-13
  */
-public class MessageDTO {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class MessageDTO implements Serializable {
 
     private String exchange;
 
     private String topic;
 
-    public String getExchange() {
-        return exchange;
-    }
-
-    public void setExchange(String exchange) {
-        this.exchange = exchange;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
+    private Object msg;
 }

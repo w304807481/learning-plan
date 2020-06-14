@@ -32,7 +32,12 @@
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
 
-    <!-- Rabbit mq -->
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+
+      <!-- Rabbit mq -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>

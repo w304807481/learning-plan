@@ -19,10 +19,10 @@ import com.github.opensharing.middleware.mq.provider.MqProvider;
  */
 @Component
 public class MqAdapter implements MqService {
-    public static final String MQ_PROVIDER_ROCKET_MQ = "RocketMq";
-    public static final String MQ_PROVIDER_RABBIT_MQ = "RabbitMq";
+    public static final String MQ_PROVIDER_ROCKET_MQ = "rocketmq";
+    public static final String MQ_PROVIDER_RABBIT_MQ = "rabbitmq";
 
-    @Value("${mq.provider:RocketMq}")
+    @Value("${mq.provider:rocketmq}")
     private String mqProvider;
 
     @Autowired
@@ -32,16 +32,16 @@ public class MqAdapter implements MqService {
     public ResultDTO send(MessageDTO messageDTO) {
         Assert.notEmpty(mqProviderMap, "Not any mq provider");
         MqProvider provider = mqProviderMap.get(this.getProviderKey(mqProvider));
-        Assert.isNull(provider, "Not match mq provider");
+        Assert.notNull(provider, "Not match mq provider");
         return provider.send(messageDTO);
     }
 
     private String getProviderKey(String mqProvider) {
         switch (mqProvider) {
             case MQ_PROVIDER_ROCKET_MQ:
-                return "rabbitMqProvider";
-            case MQ_PROVIDER_RABBIT_MQ:
                 return "rocketMqProvider";
+            case MQ_PROVIDER_RABBIT_MQ:
+                return "rabbitMqProvider";
             default:
                 return "";
         }

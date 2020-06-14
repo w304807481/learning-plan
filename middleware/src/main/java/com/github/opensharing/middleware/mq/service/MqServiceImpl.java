@@ -12,7 +12,7 @@ import com.github.opensharing.middleware.mq.model.ResultDTO;
  * @author wenzongwei
  * Date 2020-06-13
  */
-@Service
+@Service("mqService")
 public class MqServiceImpl implements MqService {
 
     @Autowired
