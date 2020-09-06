@@ -5,10 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.3.1.RELEASE</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <groupId>com.github.open-sharing</groupId>
+    <artifactId>learning-plan</artifactId>
+    <version>1.0.0.RELEASE</version>
   </parent>
 
   <groupId>com.github.open-sharing</groupId>
