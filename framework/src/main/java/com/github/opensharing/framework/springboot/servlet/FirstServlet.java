@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * HelloServlet
+ * FirstServlet
  *
  * @author wenzongwei
  * Date 2020-09-09
  * <p>
- * 配置方式一
+ * 3.1 配置方式一
  * <p>
  * 多个url
  * @WebServlet(name = "FfrstServlet", urlPatterns = {"", ""})
