@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Spingboot
- *
+ *<p>
  * 1.增加依赖
  *   <parent>
  *     <groupId>org.springframework.boot</groupId>
@@ -13,13 +13,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *     <version>2.3.3.RELEASE</version>
  *     <relativePath/> <!-- lookup parent from repository -->
  *   </parent>
- *
- * 2.启动类加关键注解
- *   @SpringBootApplication
- *
+ *<p>
+ * 2.启动类加关键注解@SpringBootApplication
+ *<p>
  * 3.编写Rest
  *   在同级目录或子目录编写。否则需要其他注解配合
- *
+ *<p>
  * @author wenzongwei
  * Date 2020-09-09
  */
