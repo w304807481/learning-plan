@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>访问静态资源DEMO</title>
+</head>
+<body>
+你好，这里是《学习计划》
+
+Springboot中访问静态资源。
+<br>
+方式二：从ServletContext（src/main/webapp）下查找。 注意：目录必须是webapp
+
+1. 新建webapp
+<br>
+2. 设置webapp
+参照：https://blog.csdn.net/qq_22771739/article/details/81588289
+<br>
+3. 设置pom.xml
+<br>
+<xmp>
+    <resources>
+        <resource>
+            <directory>src/main/webapp</directory>
+            <targetPath>META-INF/resources</targetPath>
+            <includes>
+                <include>**/**</include>
+            </includes>
+        </resource>
+    </resources>
+</xmp>
+<br>
+</body>
+</html>
