@@ -1,9 +1,9 @@
 package com.github.opensharing.archdesign.pattern.observer;
 
 /**
- * 请编写类注释
+ * WakenUp事件
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-05-10
  */
 class WakenUpEvent extends Event {

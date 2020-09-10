@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Bean;
  * 3.2 配置方式二 通过@Bean ServletListenerRegistrationBean 配置
  * <p>
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-09
  */
 @SpringBootApplication

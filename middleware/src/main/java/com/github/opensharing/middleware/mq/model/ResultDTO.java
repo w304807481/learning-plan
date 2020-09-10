@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * 结果对象
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-13
  */
 @NoArgsConstructor

@@ -12,7 +12,7 @@ import com.github.opensharing.middleware.mq.model.ResultDTO;
 /**
  * RocketMq
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-13
  */
 @ConditionalOnProperty(name = "rocketmq.name-server")

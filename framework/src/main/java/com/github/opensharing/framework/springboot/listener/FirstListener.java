@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebListener;
  * <p>
  * 3.1 配置方式一 通过注解@WebListener 配置
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-10
  */
 @WebListener

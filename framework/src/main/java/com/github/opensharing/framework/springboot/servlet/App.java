@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Bean;
  *   3.1 配置方式一 通过注解@WebServlet 配置
  *   3.2 配置方式二 通过@Bean ServletRegistrationBean 配置
  *<p>
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-09
  */
 @SpringBootApplication

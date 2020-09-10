@@ -1,9 +1,9 @@
 package com.github.opensharing.archdesign.pattern.observer;
 
 /**
- * 请编写类注释
+ * WakenUp监听者
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-05-10
  */
 interface WakenUpListener {

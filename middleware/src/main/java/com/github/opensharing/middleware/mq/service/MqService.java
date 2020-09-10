@@ -6,7 +6,7 @@ import com.github.opensharing.middleware.mq.model.ResultDTO;
 /**
  * Mq服务
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-13
  */
 public interface MqService {

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * Topic RabbitMq 消费者
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-14
  */
 @Component

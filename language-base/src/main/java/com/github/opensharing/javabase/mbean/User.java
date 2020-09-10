@@ -3,12 +3,12 @@ package com.github.opensharing.javabase.mbean;
 /**
  * 用户对象
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-08
  */
 public class User implements UserMBean {
 
-    private String name = "wenzongwei";
+    private String name = "jwen";
 
     @Override
     public String getName() {

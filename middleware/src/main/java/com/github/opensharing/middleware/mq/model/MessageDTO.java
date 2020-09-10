@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 /**
  * 消息传输对象
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-13
  */
 @Data
