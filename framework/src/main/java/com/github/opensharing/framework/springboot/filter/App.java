@@ -19,9 +19,9 @@ import org.springframework.context.annotation.Bean;
  * <p>
  * 2.启动类加关键注解@SpringBootApplication
  * <p>
- * 3.编写Servlet, 继承HttpServlet
- *   3.1 通过注解@WebFilter 配置
- *   3.2 通过@Bean ServletRegistrationBean 配置
+ * 3.编写Filter, 继承Filter
+ *   3.1 配置方式一 通过注解@WebFilter 配置
+ *   3.2 配置方式二 通过@Bean ServletRegistrationBean 配置
  */
 @SpringBootApplication
 @ServletComponentScan
@@ -32,7 +32,7 @@ public class App {
     }
 
     /**
-     * 配置方式二
+     *  3.2 配置方式二
      *
      * @return
      */

@@ -14,6 +14,9 @@ import javax.servlet.annotation.WebFilter;
  *
  * @author wenzongwei
  * Date 2020-09-10
+ *
+ * 3.1 配置方式一
+ *
  * @WebFilter(filterName = "ServletFirstFilter", urlPatterns = {"/first", "*.do"})
  */
 @WebFilter(filterName = "ServletFirstFilter", urlPatterns = "/first")

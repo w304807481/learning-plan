@@ -13,7 +13,6 @@ import javax.servlet.ServletResponse;
  *
  * @author wenzongwei
  * Date 2020-09-10
- * @WebFilter(filterName = "ServletSecondFilter", urlPatterns = {"/first", "*.do"})
  */
 public class ServletSecondFilter implements Filter {
 
