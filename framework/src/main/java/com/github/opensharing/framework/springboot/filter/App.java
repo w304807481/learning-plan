@@ -32,7 +32,7 @@ public class App {
     }
 
     /**
-     *  3.2 配置方式二
+     *  3.2 配置方式二 通过@Bean ServletRegistrationBean 配置
      *
      * @return
      */

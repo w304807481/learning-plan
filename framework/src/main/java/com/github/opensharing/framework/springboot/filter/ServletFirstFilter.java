@@ -12,10 +12,10 @@ import javax.servlet.annotation.WebFilter;
 /**
  * 自定义ServletFilter
  *
+ * 3.1 配置方式一 通过注解@WebFilter 配置
+ *
  * @author wenzongwei
  * Date 2020-09-10
- *
- * 3.1 配置方式一
  *
  * @WebFilter(filterName = "ServletFirstFilter", urlPatterns = {"/first", "*.do"})
  */

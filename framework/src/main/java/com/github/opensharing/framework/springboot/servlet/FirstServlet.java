@@ -11,11 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * FirstServlet
  *
+ * 3.1 配置方式一 通过注解@WebServlet 配置
+ *
  * @author wenzongwei
  * Date 2020-09-09
- * <p>
- * 3.1 配置方式一
- * <p>
  * 多个url
  * @WebServlet(name = "FfrstServlet", urlPatterns = {"", ""})
  */
