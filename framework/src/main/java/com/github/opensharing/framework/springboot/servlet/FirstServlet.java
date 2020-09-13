@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * 3.1 配置方式一 通过注解@WebServlet 配置
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-09
  * 多个url
  * @WebServlet(name = "FfrstServlet", urlPatterns = {"", ""})

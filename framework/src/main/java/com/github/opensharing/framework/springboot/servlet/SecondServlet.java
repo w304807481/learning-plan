@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * SecondServlet
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-09
  */
 public class SecondServlet extends HttpServlet {

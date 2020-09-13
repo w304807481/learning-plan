@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * JMX MBean Controller
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-08
  */
 @RestController

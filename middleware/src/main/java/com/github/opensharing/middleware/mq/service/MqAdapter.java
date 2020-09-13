@@ -14,7 +14,7 @@ import com.github.opensharing.middleware.mq.provider.MqProvider;
 /**
  * Mq中间件适配器
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-13
  */
 @Component

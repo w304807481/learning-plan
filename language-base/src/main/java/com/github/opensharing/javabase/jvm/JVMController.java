@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * VM options：-Xms50M -Xmx50M
  * 请单线程模拟操作
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-06
  */
 @RestController

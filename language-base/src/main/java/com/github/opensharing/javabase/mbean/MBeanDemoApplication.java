@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * JMX MBean
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-08
  */
 @SpringBootApplication

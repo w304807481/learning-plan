@@ -19,7 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 3.编写Rest
  *   在同级目录或子目录编写。否则需要其他注解配合
  *<p>
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-09
  */
 @SpringBootApplication

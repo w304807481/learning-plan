@@ -12,7 +12,7 @@ import com.github.opensharing.middleware.mq.service.MqService;
 /**
  * MQ 生产模拟类
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-14
  */
 @RestController

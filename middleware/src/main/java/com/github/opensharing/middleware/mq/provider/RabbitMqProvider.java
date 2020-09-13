@@ -11,7 +11,7 @@ import com.github.opensharing.middleware.mq.model.ResultDTO;
 /**
  * RabbitMq
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-06-13
  */
 @ConditionalOnProperty(name = "spring.rabbitmq.host")

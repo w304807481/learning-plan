@@ -6,7 +6,7 @@ package com.github.opensharing.javabase.mbean;
  * 标准MBEAN是有侵入性的，他要管理的对象是符合JAVA BEAN规范的对象。
  * 但是要作为标准MBEAN而被管理，就需要实现一个接口。这个接口的名称必须是类名加上MBean。
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-07
  */
 public interface UserMBean {

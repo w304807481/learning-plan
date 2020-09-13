@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 /**
  * 自定义ServletFilter
  *
- * @author wenzongwei
+ * @author jwen
  * Date 2020-09-10
  */
 public class ServletSecondFilter implements Filter {
