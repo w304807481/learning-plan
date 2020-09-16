@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
  * 2.启动类加关键注解@SpringBootApplication
  * <p>
  * 3.编写Filter, 继承Filter
- *   3.1 配置方式一 通过注解@WebFilter 配置
+ *   3.1 配置方式一 通过注解@WebFilter 和 启动类增加@ServletComponentScan
  *   3.2 配置方式二 通过@Bean ServletRegistrationBean 配置
  */
 @SpringBootApplication

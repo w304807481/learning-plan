@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
  * 2.启动类加关键注解@SpringBootApplication
  *<p>
  * 3.编写Servlet, 继承HttpServlet
- *   3.1 配置方式一 通过注解@WebServlet 配置
+ *   3.1 配置方式一 通过注解@WebServlet 和 启动类增加@ServletComponentScan
  *   3.2 配置方式二 通过@Bean ServletRegistrationBean 配置
  *<p>
  * @author jwen

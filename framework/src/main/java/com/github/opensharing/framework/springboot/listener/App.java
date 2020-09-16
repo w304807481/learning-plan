@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Bean;
  * 2.启动类加关键注解@SpringBootApplication
  * <p>
  * 3.编写Listener, 实现相应的接口， 比如ServletContextListener
- * 3.1 配置方式一 通过注解@WebListener 配置
+ * 3.1 配置方式一 通过注解@WebListener 和 启动类增加@ServletComponentScan
  * 3.2 配置方式二 通过@Bean ServletListenerRegistrationBean 配置
  * <p>
  *
