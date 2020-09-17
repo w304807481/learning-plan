@@ -29,8 +29,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 在同级目录或子目录编写。否则需要其他注解配合
  * <p>
  * 4.增加配置参数
- * spring.mvc.view.prefix=/WEB-INF/jsp/
- * spring.mvc.view.suffix=.jsp
+ *   spring.mvc.view.prefix=/WEB-INF/jsp/
+ *   spring.mvc.view.suffix=.jsp
  * <p>
  * 5.编写JSP
  *
