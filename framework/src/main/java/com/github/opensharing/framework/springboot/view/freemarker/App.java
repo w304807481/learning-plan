@@ -1,4 +1,4 @@
-package com.github.opensharing.framework.springboot.view.jsp;
+package com.github.opensharing.framework.springboot.view.freemarker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,19 +8,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * <p>
  * 1.增加依赖
  * <parent>
- *   <groupId>org.springframework.boot</groupId>
- *   <artifactId>spring-boot-starter-parent</artifactId>
- *   <version>2.3.3.RELEASE</version>
- *   <relativePath/> <!-- lookup parent from repository -->
+ * <groupId>org.springframework.boot</groupId>
+ * <artifactId>spring-boot-starter-parent</artifactId>
+ * <version>2.3.3.RELEASE</version>
+ * <relativePath/> <!-- lookup parent from repository -->
  * </parent>
  * <dependency>
- *   <groupId>javax.servlet</groupId>
- *   <artifactId>jstl</artifactId>
- *   </dependency>
+ * <groupId>javax.servlet</groupId>
+ * <artifactId>jstl</artifactId>
+ * </dependency>
  * <dependency>
- *   <groupId>org.apache.tomcat.embed</groupId>
- *   <artifactId>tomcat-embed-jasper</artifactId>
- *   <scope>provided</scope>
+ * <groupId>org.apache.tomcat.embed</groupId>
+ * <artifactId>tomcat-embed-jasper</artifactId>
+ * <scope>provided</scope>
  * </dependency>
  * <p>
  * 2.启动类加关键注解@SpringBootApplication

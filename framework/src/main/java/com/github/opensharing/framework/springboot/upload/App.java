@@ -13,10 +13,10 @@ import org.springframework.util.unit.DataSize;
  * <p>
  * 1.增加依赖
  * <parent>
- * <groupId>org.springframework.boot</groupId>
- * <artifactId>spring-boot-starter-parent</artifactId>
- * <version>2.3.3.RELEASE</version>
- * <relativePath/> <!-- lookup parent from repository -->
+ *   <groupId>org.springframework.boot</groupId>
+ *   <artifactId>spring-boot-starter-parent</artifactId>
+ *   <version>2.3.3.RELEASE</version>
+ *   <relativePath/> <!-- lookup parent from repository -->
  * </parent>
  * <p>
  * 2.启动类加关键注解@SpringBootApplication
@@ -24,8 +24,8 @@ import org.springframework.util.unit.DataSize;
  * 3.编写UploadController
  * <p>
  * 4.通过Spring配置文件或 MultipartConfigFactory配置
- * spring.http.multipart.maxFileSize=10Mb
- * spring.http.multipart.maxRequestSize=100Mb
+ *   spring.http.multipart.maxFileSize=10Mb
+ *   spring.http.multipart.maxRequestSize=100Mb
  * <p>
  *
  * @author jwen
