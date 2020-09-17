@@ -25,7 +25,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * <p>
  * 2.启动类加关键注解@SpringBootApplication
  * <p>
- * 3.编写Rest
+ * 3.编写Controller 注意必须是@Controller， 不能是@RestController
  * 在同级目录或子目录编写。否则需要其他注解配合
  * <p>
  * 4.增加配置参数
