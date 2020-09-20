@@ -4,6 +4,11 @@
 ## 1. 语言基础知识
 对应代码模块----language-base
 > 记录常用研发语言（Java，Python，js等）的特性，原理知识
+>
+>1. JVM 知识体系
+>2. JMX mbean
+>3. Java 8 Lambda表达式及使用
+>4. Java 8 Stream集合运算
 
 ## 2. 框架知识
 对应代码模块----framework
