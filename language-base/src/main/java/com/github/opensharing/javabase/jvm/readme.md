@@ -1,10 +1,10 @@
 ## 深入理解JVM
 
-1. 理论知识图谱]
+#### 1. 理论知识图谱]
 
     知识图谱参考：docs/pdf/深入理解JVM.pdf
     
-2. 实践步骤
+#### 2. 实践步骤
 
     2.1 配置JVMDemoApplication启动的VM options：-Xms50M -Xmx50M
     
