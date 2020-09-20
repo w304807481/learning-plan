@@ -1,4 +1,4 @@
-package com.github.opensharing.javabase.mbean;
+package com.github.opensharing.javabase.mbean.model;
 
 /**
  * User暴露出的管理接口

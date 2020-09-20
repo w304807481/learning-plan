@@ -1,4 +1,4 @@
-package com.github.opensharing.javabase.mbean;
+package com.github.opensharing.javabase.mbean.model;
 
 /**
  * 用户对象
