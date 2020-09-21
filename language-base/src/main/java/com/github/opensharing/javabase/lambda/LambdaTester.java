@@ -39,6 +39,7 @@ public class LambdaTester {
      * 无参表达式
      */
     private static void testNoArgsLambda() {
+        System.out.println("\n-------------------无参表达式-----------------------\n");
         //old
         new Thread((new Runnable() {
             @Override
@@ -55,12 +56,13 @@ public class LambdaTester {
      * 对象::实例方法
      */
     public static void testMethodRefLambda() {
+        System.out.println("\n-------------------对象::实例方法-----------------------\n");
         List<User> list = UserFactory.buildUserList();
         Consumer<User> changeAge = e -> e.setAge(e.getAge() + 3);
         list.forEach(changeAge);
 
         //一般写法
-        System.out.println("\n对象调用实例方法一般写法结果:");
+        System.out.println("对象调用实例方法一般写法结果:");
         list.forEach((x) -> System.out.println(x));
 
         //简化写法
@@ -72,9 +74,10 @@ public class LambdaTester {
      * 类::静态方法
      */
     public static void testClazzStaticMethodRefLambda() {
+        System.out.println("\n-------------------类::静态方法----------------------\n");
         //一般写法
         Function<Integer, String> sf =  (x) -> String.valueOf(x);
-        System.out.println("\n类调用静态方法一般写法结果: " + sf.apply(1000));
+        System.out.println("类调用静态方法一般写法结果: " + sf.apply(1000));
 
         //简化写法
         Function<Integer, String> sf2 = String::valueOf;
@@ -85,9 +88,10 @@ public class LambdaTester {
      * 类::实例方法
      */
     public static void testClazzInstanceMethodRefLambda() {
+        System.out.println("\n-------------------类::实例方法----------------------\n");
         //一般写法
         BiPredicate<String, String> bp = (x, y) -> x.equals(y);
-        System.out.println("\n类调用实例方法一般写法结果: " + bp.test("abc", "ABC"));
+        System.out.println("类调用实例方法一般写法结果: " + bp.test("abc", "ABC"));
 
         //简化写法
         BiPredicate<String, String> bp2 = String::equals;
@@ -98,10 +102,11 @@ public class LambdaTester {
      * 无参的构造方法就是类::实例方法模型
      */
     public static void testClazzNoArgsConstructorRefLambda() {
+        System.out.println("\n-------------------无参的构造方法就是类::实例方法模型----------------------\n");
         //一般写法
         Supplier<User> us = () -> new User();
         User user1 = us.get();
-        System.out.println("\n无参的构造方法一般写法结果:" + user1);
+        System.out.println("无参的构造方法一般写法结果:" + user1);
 
         //简化写法
         Supplier<User> us2 = User::new;
