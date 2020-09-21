@@ -15,10 +15,10 @@ public class UserFactory {
 
     public static List<User> buildUserList() {
         return Lists.newArrayList(
-                new User(1, "Tom", 21,  "男"),
-                new User(2, "Jack", 22, "男"),
+                new User(1, "Tom", 23,  "男"),
+                new User(2, "Jack", 20, "男"),
                 new User(3, "Lily", 23, "女"),
-                new User(4, "Bell", 24, "女"),
-                new User(5, "Peter", 25, "男"));
+                new User(4, "Bell", 26, "女"),
+                new User(5, "Peter", 21, "男"));
     }
 }
