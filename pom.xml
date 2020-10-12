@@ -19,6 +19,7 @@
         <module>middleware</module>
         <module>arch-design</module>
         <module>tools</module>
+        <module>rabbitmq</module>
     </modules>
 
     <properties>
