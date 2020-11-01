@@ -1,4 +1,4 @@
-package com.github.opensharing.javabase.jvm;
+package com.github.opensharing.javabase.jvm.jmm;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

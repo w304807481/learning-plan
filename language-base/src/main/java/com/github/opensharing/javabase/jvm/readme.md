@@ -1,30 +1,16 @@
 ## 深入理解JVM
 
-#### 1. 理论知识图谱]
+#### 1. 理论知识图谱
 
-    知识图谱参考：docs/pdf/深入理解JVM.pdf
+- 1.1 知识图谱参考：language-base/docs/pdf/深入理解JVM.pdf
     
-#### 2. 实践步骤
+- 1.2 JVM是什么：language-base/docs/image/JVM是什么.png (TODO：图解)
+    
+- 1.3 [深入理解类加载全过程](./classloading/readme.md)
 
-    2.1 配置JVMDemoApplication启动的VM options：-Xms50M -Xmx50M
-    
-    2.2 启动JVMDemoApplication
-    
-    2.3 启动jvisualvm，安装Visual GC 
-    
-    2.4 监控JVM 初始状态
-    
-        2.4.1 通过 Visual GC 直接图形化查看
-        
-        2.4.2 通过 jps -l , 和jstat -gc  pid  intervalTime  times  命令窗口来查看，原理相似。
+- 1.4 [深入理解Class文件格式](./classfileformat/readme.md)
+   
+#### 2. 实践
 
-    2.5 模拟对象创建，直到发生OOM
-     
-        2.5.1 模拟对象创建：浏览器访问 http://localhost:8080/jvm/object/new/{loop}
-            loop=8 OOM发生
-        
-        2.5.2 模拟对象释放：浏览器访问 http://localhost:8080/jvm/object/gc/{loop}
-        
-    2.6 观察JVM 各代内存变化，GC次数，时间变化情况
-        
-        可以通过jvisualvm中主动发起垃圾回收（实际调用System.gc()， 触发full gc)
+- 2.1 [利用JDK Tools观察内存情况](./jmm/readme.md)
+    
