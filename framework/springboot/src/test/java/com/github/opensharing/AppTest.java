@@ -1,4 +1,4 @@
-package com.github.open-sharing;
+package com.github.opensharing;
 
 import static org.junit.Assert.assertTrue;
 
