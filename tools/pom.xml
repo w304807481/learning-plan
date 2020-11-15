@@ -8,6 +8,7 @@
   <artifactId>tools</artifactId>
   <packaging>pom</packaging>
   <version>1.0.0.RELEASE</version>
+
   <modules>
     <module>maven-docker</module>
   </modules>

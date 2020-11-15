@@ -38,10 +38,10 @@
 
   <build>
     <plugins>
-      <!--docker镜像build插件-->
+      <!--docker镜像build插件（新版本）-->
       <plugin>
         <groupId>com.spotify</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

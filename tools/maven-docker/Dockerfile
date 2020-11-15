@@ -1,7 +1,8 @@
-#docker镜像build插件（老版本）
+#docker镜像build插件（新版本）
 FROM java:alpine
 MAINTAINER jwen
 
 VOLUME /tmp
-ADD maven-docker-1.0.0-SNAPSHOT.jar app.jar
+ARG JAR_FILE
+ADD target/${JAR_FILE} app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]

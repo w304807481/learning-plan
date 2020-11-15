@@ -206,7 +206,7 @@
             </executions>
         </plugin>
         -->
-        <!--docker镜像build插件-->
+        <!--docker镜像build插件（老版本）-->
         <plugin>
           <groupId>com.spotify</groupId>
           <artifactId>docker-maven-plugin</artifactId>
@@ -223,6 +223,28 @@
                 <include>${project.build.finalName}.jar</include>
               </resource>
             </resources>
+          </configuration>
+        </plugin>
+        <!--docker镜像build插件（新版本）-->
+        <plugin>
+          <groupId>com.spotify</groupId>
+          <artifactId>dockerfile-maven-plugin</artifactId>
+          <version>1.4.13</version>
+          <executions>
+            <execution>
+              <id>default</id>
+              <goals>
+                <goal>build</goal>
+                <goal>push</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <repository>learning-plan/${project.artifactId}</repository>
+            <tag>${project.version}</tag>
+            <buildArgs>
+              <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+            </buildArgs>
           </configuration>
         </plugin>
       </plugins>
