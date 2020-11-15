@@ -1,4 +1,4 @@
-package com.github.opensharing.middleware;
+package com.github.opensharing.middleware.mq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
