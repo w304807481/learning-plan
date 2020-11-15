@@ -4,16 +4,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>com.github.open-sharing</groupId>
-    <artifactId>learning-plan</artifactId>
-    <version>1.0.0.RELEASE</version>
-  </parent>
-
   <groupId>com.github.open-sharing</groupId>
   <artifactId>middleware</artifactId>
   <version>1.0.0.RELEASE</version>
-
+  <description>中间件知识</description>
   <name>middleware</name>
 
   <parent>
