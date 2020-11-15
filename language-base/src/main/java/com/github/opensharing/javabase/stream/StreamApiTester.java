@@ -3,6 +3,7 @@ package com.github.opensharing.javabase.stream;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import com.github.opensharing.javabase.stream.model.User;
 
@@ -32,6 +33,10 @@ public class StreamApiTester {
 
         //6.reduce: 也是对所有值进行操作，但它是将所有值，按照传入的处理逻辑，将结果处理合并为一个
         testReduceOfStreamApi();
+
+        //7.collect方法以集合中的元素为基础，生成新的对象
+        testCollectOfStreamApi();
+
     }
 
     /**
@@ -156,9 +161,35 @@ public class StreamApiTester {
      */
     private static void testReduceOfStreamApi() {
         System.out.println("\n-------------------reduce: 也是对所有值进行操作，但它是将所有值，按照传入的处理逻辑，将结果处理合并为一个-----------------------\n");
-        List<User> list = UserFactory.buildUserList();
-        System.out.println("集合初始状态：");
-        list.stream().forEach(System.out::println);
+        //相当于foreach遍历操作结果值
+        Integer out = Stream.of(1,2,3).reduce((result, item) -> {
+            if (item >= 3) {
+                result = result + item;
+            }
+            return result;
+        }).get();
+        System.out.println("串行计算:" + out);
+
+        //相当于给定初始结果值，foreach遍历操作结果值
+        Integer sum = Stream.of(1,2,3).reduce(2, (result, item) -> result + item);
+        System.out.println("带起始值串行计算:" + sum);
+
+        //相当于给定初始结果值，两个foreach遍历操作结果值
+        int str = Stream.of(1,2,3).parallel().reduce(2, (result, item) -> {
+            System.out.println(result + "_" + item);
+            return result + item;
+        } , (result, item) -> {
+            //注：只有并行parallel下才会进入此方法
+            System.out.println(result + "&" + item);
+            return result + item ;
+        });
+        System.out.println("带起始值并行计算:" + str);
+    }
+
+    /**
+     * collect方法以集合中的元素为基础，生成新的对象
+     */
+    private static void testCollectOfStreamApi() {
 
     }
 }
