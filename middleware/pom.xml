@@ -15,8 +15,12 @@
   <version>1.0.0.RELEASE</version>
 
   <name>middleware</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+
+  <parent>
+    <groupId>com.github.open-sharing</groupId>
+    <artifactId>learning-plan</artifactId>
+    <version>1.0.0.RELEASE</version>
+  </parent>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
