@@ -5,14 +5,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.github.open-sharing</groupId>
-  <artifactId>arch-design</artifactId>
-  <version>1.0.0.RELEASE</version>
-
-  <name>arch-design</name>
+  <artifactId>javabase</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <description>Java语言知识</description>
+  <name>javabase</name>
 
   <parent>
     <groupId>com.github.open-sharing</groupId>
-    <artifactId>learning-plan</artifactId>
+    <artifactId>language-base</artifactId>
     <version>1.0.0.RELEASE</version>
   </parent>
 
@@ -23,6 +23,24 @@
   </properties>
 
   <dependencies>
+    <!-- spring boot -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <!-- Java Object layout -->
+    <dependency>
+      <groupId>org.openjdk.jol</groupId>
+      <artifactId>jol-core</artifactId>
+      <version>0.8</version>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -30,7 +48,4 @@
     </dependency>
   </dependencies>
 
-  <build>
-
-  </build>
 </project>
