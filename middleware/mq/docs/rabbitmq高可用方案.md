@@ -487,8 +487,8 @@ Imported definitions for localhost from "rabbitmq-backup.json"
 # 将rabbitmqadmin 复制到 /usr/local/bin 目录下
 cp -r /var/lib/rabbitmq/mnesia/rabbit-plugins-expand/rabbitmq_management-3.6.5/priv/www/cli/rabbitmqadmin /usr/local/bin/rabbitmqadmin
 # 授权rabbitmqadmin可执行
-chmod +x rabbitmqadmin
-# 执行导入命令
+chmod +x /usr/local/bin/rabbitmqadmin
+# 执行导入命令 文件存在路径
 rabbitmqadmin import rabbitmq-backup.json 
 ```
 
