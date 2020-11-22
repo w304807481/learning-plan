@@ -439,3 +439,56 @@ location ~* /rabbitmq/api/ {
 }
 ```
 
+
+
+## 4.rabbitmq 配置的备份与恢复
+
+链接官网：https://www.rabbitmq.com/management-cli.html
+
+​       **注意：此处的备份只是备份RabbitMQ用户、vhost、队列、交换和绑定，备份文件是RabbitMQ元数据的JSON表示，我们将使用rabbitmqadmin命令行工具进行备份。**
+
+1.下载rabbitmqadmin
+
+​	启用管理插件后，下载与HTTP API交互的rabbitmqadmin Python命令行工具，它可以从任何启用了管理插件的RabbitMQ节点下载：**http://{node-hostname}:15672/cli/**
+
+   下载后，使文件可执行并将其移动到/usr/local/bin目录：
+
+```
+chmod +x rabbitmqadmin
+sudo mv rabbitmqadmin /usr/local/bin
+```
+
+2.备份配置 与 恢复mq配置
+
+备份配置命令：
+
+```
+rabbitmqadmin export <backup-file-name>
+比如：
+$ rabbitmqadmin export rabbitmq-backup-config.json
+Exported definitions for localhost to "rabbitmq-backup-config.json"
+导出写入文件filerabbitmq-backup-config.json。
+```
+
+恢复配置命令
+
+```
+rabbitmqadmin import <JSON backup file >
+比如：
+$ rabbitmqadmin import rabbitmq-backup.json 
+Imported definitions for localhost from "rabbitmq-backup.json"
+```
+
+
+
+
+
+```shell
+# 将rabbitmqadmin 复制到 /usr/local/bin 目录下
+cp -r /var/lib/rabbitmq/mnesia/rabbit-plugins-expand/rabbitmq_management-3.6.5/priv/www/cli/rabbitmqadmin /usr/local/bin/rabbitmqadmin
+# 授权rabbitmqadmin可执行
+chmod +x rabbitmqadmin
+# 执行导入命令
+rabbitmqadmin import rabbitmq-backup.json 
+```
+
