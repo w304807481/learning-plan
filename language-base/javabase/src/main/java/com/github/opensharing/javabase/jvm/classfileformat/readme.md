@@ -45,6 +45,6 @@
 
   - 2.2 通过安装IDEA插件：JClasslib查看
     > 找到Java文件，光标放在类文件中，如下图操作
-    > 参见：language-base/docs/image/查看Class文件内容-jclasslib.png
+    > 参见：language-base/javabase/docs/image/查看Class文件内容-jclasslib.png
   
   - 2.3 可以通过给Hello.java 不断增加属性，方法，观察class文件的内容变化

@@ -2,7 +2,7 @@
 
 #### 1. 理论知识
 
-- 1.1 JAVA从编译到执行: language-base/docs/image/JAVA从编译到执行.png (TODO：图解)
+- 1.1 JAVA从编译到执行: language-base/javabase/docs/image/JAVA从编译到执行.png
 
 - 1.2 对象的内存布局: language-base/docs/image/JavaObjectLayout.png
   >[参考](https://www.cnblogs.com/JonaLin/p/13864578.html) 使用openjdk的工具jol
