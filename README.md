@@ -30,3 +30,6 @@
 对应代码模块----tools
 > 记录常用编程工具（设计：UML，Drawio，processon，visualdesign， 研发：Eclipse，Idea，Postman，DBeaver ， 测试：Jmeter）及使用经验
 
+## 7. 网络IO
+对应代码模块----network-io
+> 记录内存与IO，磁盘IO，网络IO，以及程序员应该掌握的操作系统级别底层知识
