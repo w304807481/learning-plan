@@ -20,6 +20,7 @@
     <module>arch-design</module>
     <module>tools</module>
     <module>network-io</module>
+    <module>algorithm</module>
   </modules>
 
   <properties>
