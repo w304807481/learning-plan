@@ -1,0 +1,14 @@
+eureka:
+  instance:
+    hostname: h2
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://h1:8080/eureka/
+
+server:
+  port: 8081
+spring:
+  application:
+    name: eureka-server
