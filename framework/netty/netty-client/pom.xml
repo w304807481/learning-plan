@@ -9,6 +9,7 @@
     <groupId>com.github.open-sharing</groupId>
     <artifactId>framework</artifactId>
     <version>1.0.0.RELEASE</version>
+    <relativePath>../../pom.xml</relativePath>
   </parent>
 
   <properties>
@@ -39,5 +40,22 @@
       <artifactId>spring-boot-starter-logging</artifactId>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>2.6.6</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
