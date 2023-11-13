@@ -6,6 +6,8 @@
   <packaging>pom</packaging>
   <modules>
     <module>springboot</module>
+    <module>spring</module>
+    <module>netty</module>
   </modules>
 
   <parent>
