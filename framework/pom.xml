@@ -7,7 +7,8 @@
   <modules>
     <module>springboot</module>
     <module>spring</module>
-    <module>netty</module>
+    <module>netty/netty-server</module>
+    <module>netty/netty-client</module>
   </modules>
 
   <parent>
