@@ -4,8 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.open-sharing</groupId>
-  <artifactId>netty-client</artifactId>
-  <version>1.0.4.RELEASE</version>
+  <artifactId>netty-common</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0.0.RELEASE</version>
 
   <parent>
     <groupId>com.github.open-sharing</groupId>
@@ -21,9 +22,14 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.github.open-sharing</groupId>
-      <artifactId>netty-common</artifactId>
-      <version>1.0.0.RELEASE</version>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.50.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.28</version>
     </dependency>
 
     <!-- spring boot -->
@@ -36,23 +42,12 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-logging</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.1.50.Final</version>
+      <scope>compile</scope>
+    </dependency>
   </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.6.6</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>repackage</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 
 </project>

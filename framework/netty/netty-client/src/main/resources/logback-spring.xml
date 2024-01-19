@@ -8,10 +8,10 @@
   </appender>
 
   <appender name="STDFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>./framework/netty/netty-client.log</file>
+    <file>netty-client.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <!-- 每天一归档 -->
-      <fileNamePattern>mylog-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+      <fileNamePattern>netty-client-%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
       <!-- 单个日志文件最多 100MB, 60天的日志周期，最大不能超过20GB,窗口大小是1到3，当保存了3个归档文件后，将覆盖最早的日志 -->
       <maxFileSize>100MB</maxFileSize>
       <maxHistory>60</maxHistory>

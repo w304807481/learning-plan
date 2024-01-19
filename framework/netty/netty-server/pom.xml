@@ -3,7 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <groupId>com.github.open-sharing</groupId>
   <artifactId>netty-server</artifactId>
+  <version>1.0.3.RELEASE</version>
 
   <parent>
     <groupId>com.github.open-sharing</groupId>
@@ -19,14 +21,9 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-all</artifactId>
-      <version>4.1.50.Final</version>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.28</version>
+      <groupId>com.github.open-sharing</groupId>
+      <artifactId>netty-common</artifactId>
+      <version>1.0.0.RELEASE</version>
     </dependency>
 
     <!-- spring boot -->

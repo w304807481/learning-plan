@@ -2,8 +2,9 @@ package com.github.opensharing.framework.netty.hander;
 
 import java.net.SocketAddress;
 
+import com.github.opensharing.framework.netty.MessageProtocol;
+
 import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
@@ -31,7 +32,7 @@ public class NettyClientTestHandler extends ChannelInboundHandlerAdapter {
         //ctx.writeAndFlush(Unpooled.copiedBuffer("Hello Server", CharsetUtil.UTF_8));
 
         for (int i = 0; i < 1000000; i++) {
-            ctx.write(Unpooled.copiedBuffer("Hello Server" + i + " ", CharsetUtil.UTF_8));
+            ctx.write(new MessageProtocol("Hello Server" + i + " "));
             Thread.sleep(1);
 
             if ((i+1)%10000 == 0) {
@@ -51,6 +52,7 @@ public class NettyClientTestHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        log.info(ctx.channel().remoteAddress() + " 已断开连接", cause);
         ctx.close();
     }
 }

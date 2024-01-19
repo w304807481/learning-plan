@@ -2,7 +2,9 @@ package com.github.opensharing.framework.netty;
 
 import java.util.concurrent.TimeUnit;
 
-import com.github.opensharing.framework.netty.hander.NettyClientTestHandler;
+import com.github.opensharing.framework.netty.hander.MyClientHandler;
+import com.github.opensharing.framework.netty.hander.MyMessageDecoder;
+import com.github.opensharing.framework.netty.hander.MyMessageEncoder;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -23,11 +25,37 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class NettyClient {
-    private final EventLoopGroup group = new NioEventLoopGroup();
-    private final int port = 5103;
-    private final String host = "127.0.0.1";
+    /**
+     * 消息发送间隔时间
+     */
+    private int msgIntervalTime = 1000;
+
+    /**
+     * 停止消息的限制
+     */
+    private int msgStopLimit = 10;
+
+    private final EventLoopGroup group = new NioEventLoopGroup(1);
+
+    public NettyClient(){
+
+    }
+
+    public NettyClient(int msgIntervalTime, int msgStopLimit) {
+        this.msgIntervalTime = msgIntervalTime;
+        this.msgStopLimit = msgStopLimit;
+    }
 
     public void start() throws InterruptedException {
+        this.start("127.0.0.1", 5102);
+    }
+
+    public void start(int port) throws InterruptedException {
+        this.start("127.0.0.1", port);
+    }
+
+    public void start(String host, int port) throws InterruptedException {
+
         try {
             Bootstrap bootstrap = new Bootstrap();
             // 客户端不需要处理连接 所以一个线程组就够了
@@ -40,7 +68,24 @@ public class NettyClient {
                     .handler(new ChannelInitializer<Channel>() {
                         @Override
                         protected void initChannel(Channel channel) throws Exception {
-                            channel.pipeline().addLast(new NettyClientTestHandler());
+                            channel.pipeline()
+                                    .addLast(new MyMessageEncoder())
+                                    .addLast(new MyMessageDecoder())
+                                    /* // 20s 内如果没有向服务器写数据，会触发一个 IdleState#WRITER_IDLE 事件
+                                    .addLast(new IdleStateHandler(0, 20, 0))
+                                    .addLast(new ChannelDuplexHandler() {
+                                        // 用来触发特殊事件
+                                        @Override
+                                        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
+                                            IdleStateEvent event = (IdleStateEvent) evt;
+                                            // 触发了写空闲事件
+                                            if (event.state() == IdleState.WRITER_IDLE) {
+                                                ctx.writeAndFlush(new MessageProtocol("Ping Server"));
+                                                log.info(ctx.channel().remoteAddress() + " 20s 没有写数据了，发送一个心跳包");
+                                            }
+                                        }
+                                    })*/
+                                    .addLast(new MyClientHandler(msgIntervalTime, msgStopLimit));
                         }
                     });
             ChannelFuture future = bootstrap.connect();
@@ -56,15 +101,25 @@ public class NettyClient {
                         } catch (InterruptedException e) {
                             log.error("连接失败", e);
                         }
-                    }, 20, TimeUnit.SECONDS);
+                    }, 5, TimeUnit.SECONDS);
                 }
             });
-            future.channel().closeFuture().sync();
+
+            //future.channel().closeFuture().sync();
         } catch (Exception e) {
             log.info("服务端异常", e);
-        } finally {
+
+            if (group != null) {
+                group.shutdownGracefully();
+            }
+        }
+    }
+
+    public void stop() {
+        if (group != null) {
             group.shutdownGracefully();
         }
+        log.info("Netty Client 已停止");
     }
 
     public static void main(String[] args) throws InterruptedException {

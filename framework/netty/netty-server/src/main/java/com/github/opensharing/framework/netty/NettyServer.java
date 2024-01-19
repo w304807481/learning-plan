@@ -4,7 +4,9 @@ import java.util.Random;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.github.opensharing.framework.netty.hander.NettyServerTestHandler;
+import com.github.opensharing.framework.netty.hander.MyMessageDecoder;
+import com.github.opensharing.framework.netty.hander.MyMessageEncoder;
+import com.github.opensharing.framework.netty.hander.MyServerHandler;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -29,34 +31,46 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class NettyServer {
 
+    private final AtomicInteger msgCounter = new AtomicInteger();
+    private final AtomicInteger clientCounter = new AtomicInteger();
+
     private boolean epollMode = false;
+
+    //1.连接线程：bossGroup
+    private final EventLoopGroup bossGroup;
+    //2.工作线程组：workGroup
+    private final EventLoopGroup workerGroup;
+    //3.Server
+    private final ServerBootstrap serverBootstrap;
 
     public NettyServer(boolean epollMode) {
         this.epollMode = epollMode && Epoll.isAvailable();
 
-        if (epollMode) {
+        if (this.epollMode) {
             log.info("epollMode is setup");
         } else {
             log.info("nioMode is setup");
         }
+
+        this.bossGroup = this.getBossGroup();
+        this.workerGroup = this.getWorkerGroup();
+        this.serverBootstrap = new ServerBootstrap();
     }
 
-    //1.连接线程：bossGroup
-    private final EventLoopGroup bossGroup = this.getBossGroup();
-    //2.工作线程组：workGroup
-    private final EventLoopGroup workerGroup = this.getWorkerGroup();
-    //3.Server
-    private final ServerBootstrap serverBootstrap = new ServerBootstrap();
-
     public void start() throws InterruptedException {
-        try {
-            init();
-            bindPorts();
-        } finally {
-            // 优雅的关闭 释放资源
+        init();
+        bindPorts();
+    }
+
+    public void stop() {
+        // 优雅的关闭 释放资源
+        if (bossGroup != null) {
             bossGroup.shutdownGracefully();
+        }
+        if (workerGroup != null) {
             workerGroup.shutdownGracefully();
         }
+        log.info("Netty Server 停止");
     }
 
     private void init() {
@@ -67,6 +81,7 @@ public class NettyServer {
 
                 //服务端可连接队列数,对应TCP/IP协议listen函数中backlog参数
                 .option(ChannelOption.SO_BACKLOG, 1024)
+                .option(ChannelOption.SO_RCVBUF, 1024)
 
                 //ByteBuf的分配器(重用缓冲区)，默认值为ByteBufAllocator.DEFAULT
                 //.option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
@@ -90,9 +105,32 @@ public class NettyServer {
                     @Override
                     protected void initChannel(Channel channel) throws Exception {
                         // 在管道中 添加数据处理类
-                        channel.pipeline().addLast(new NettyServerTestHandler());
+                        channel.pipeline()
+                                .addLast(new MyMessageDecoder())
+                                .addLast(new MyMessageEncoder())
+                                /*//60s 内如果没有收到 channel 的数据，会触发一个 IdleState#READER_IDLE 事件
+                                .addLast(new IdleStateHandler(60,0,0))
+                                .addLast(new ChannelDuplexHandler() {
+                                    // 用来触发特殊事件
+                                    @Override
+                                    public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception{
+                                        IdleStateEvent event = (IdleStateEvent) evt;
+                                        // 触发了读空闲事件
+                                        if (event.state() == IdleState.READER_IDLE) {
+                                            ctx.channel().close();
+                                            log.info(ctx.channel().remoteAddress() + " 已经 60s 没有读到数据了, 已断开连接, 目前累计{}", clientCounter.get());
+                                        }
+                                    }
+                                })*/
+                                .addLast(new MyServerHandler(clientCounter, msgCounter));
                     }
                 });
+
+//        // linux平台下支持SO_REUSEPORT特性以提高性能
+//        if (epollMode) {
+//            log.info("启用了 SO_REUSEPORT");
+//            serverBootstrap.option(EpollChannelOption.SO_REUSEPORT, true);
+//        }
     }
 
     private void bindPorts() throws InterruptedException {
@@ -107,20 +145,21 @@ public class NettyServer {
         log.info("启动 Netty Server (5104) " + (future5104.isSuccess() ? "成功" : "失败"));
 
         //等待服务端监听端口关闭 链路关闭后main函数才会结束
-        future5102.channel().closeFuture().sync();
-        future5103.channel().closeFuture().sync();
-        future5104.channel().closeFuture().sync();
+//        future5102.channel().closeFuture().sync();
+//        future5103.channel().closeFuture().sync();
+//        future5104.channel().closeFuture().sync();
     }
 
     private WriteBufferWaterMark getWriteBufferWaterMark() {
-        //23k - 64k
+        //32k - 64k
         return new WriteBufferWaterMark(32 * 1024, 64 * 1024);
     }
 
     private EventLoopGroup getBossGroup() {
 
         if (epollMode) {
-            return new EpollEventLoopGroup(10, new ThreadFactory() {
+            log.info("BossGroup is setup to EpollEventLoopGroup");
+            return new EpollEventLoopGroup(1, new ThreadFactory() {
                 @Override
                 public Thread newThread(Runnable r) {
                     Thread t = new Thread(r);
@@ -143,6 +182,7 @@ public class NettyServer {
 
     private EventLoopGroup getWorkerGroup() {
         if (epollMode) {
+            log.info("WorkerGroup is setup to EpollEventLoopGroup");
             return new EpollEventLoopGroup(20, new ThreadFactory() {
                 private final AtomicInteger threadCounter = new AtomicInteger(1);
 
@@ -168,6 +208,9 @@ public class NettyServer {
         }
     }
 
+    public AtomicInteger getClientCounter() {
+        return clientCounter;
+    }
 
     public static void main(String[] args) throws InterruptedException {
         new NettyServer(true).start();

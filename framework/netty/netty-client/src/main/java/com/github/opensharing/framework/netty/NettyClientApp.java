@@ -1,5 +1,7 @@
 package com.github.opensharing.framework.netty;
 
+import java.util.Arrays;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -26,6 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class NettyClientApp {
 
     public static void main(String[] args) {
+        log.info("App boot args: " + Arrays.asList(args));
         SpringApplication.run(NettyClientApp.class, args);
     }
 }
