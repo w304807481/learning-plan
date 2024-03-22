@@ -1,6 +1,12 @@
 package com.github.opensharing.framework.springboot.hello.dto;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -9,12 +15,16 @@ import lombok.ToString;
  * @author jwen
  * Date 2024/3/21
  */
+@TableName
 @ToString
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     /**
      * 用户ID
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

@@ -1,6 +1,6 @@
 package com.github.opensharing.framework.springboot.hello.dao;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.opensharing.framework.springboot.hello.dto.User;
@@ -11,6 +11,6 @@ import com.github.opensharing.framework.springboot.hello.dto.User;
  * @author jwen
  * Date 2024/3/21
  */
-@Repository
+@Mapper
 public interface UserMapper extends BaseMapper<User> {
 }
