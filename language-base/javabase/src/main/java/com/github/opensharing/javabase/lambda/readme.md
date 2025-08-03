@@ -84,13 +84,67 @@
 ### 2. 常见的函数式接口及用法
 
 #### 2.1 Runnable/Callable
+参见FunctionalInterfaceLambdaTester
 
 #### 2.2 Supplier/Consumer
+参见FunctionalInterfaceLambdaTester
 
 #### 2.3 Comparator
+参见FunctionalInterfaceLambdaTester
 
 #### 2.4 Predicate
+参见FunctionalInterfaceLambdaTester
 
 #### 2.4 Function
+参见FunctionalInterfaceLambdaTester
 
 ### 3. lambda实现原理
+> lambda表达式最终就是一个匿名内部类实现
+>
+> 在编译的时候，“脱糖”， 即转为LambdaMetafactory构建【对应接口】的匿名内部类的调用，
+> 
+> 在执行的时候，通过ASM技术生成新的匿名内部类，并动态修改原Class文件，将调用新构建的内部类代码编入到原始类中
+
+```java
+    LambdaMetafactory.java
+
+    public static CallSite metafactory(MethodHandles.Lookup caller,
+                                       String invokedName,
+                                       MethodType invokedType,
+                                       MethodType samMethodType,
+                                       MethodHandle implMethod,
+                                       MethodType instantiatedMethodType){
+    
+}
+```
+
+原始代码：
+```java
+public static void main(String[] args) {
+    List<String> strList = Arrays.asList(.....);
+    strList.forEach(s -> {
+        System.out.println(s);
+    });
+}
+```
+
+编译后
+```java
+public static void main(String[] args) {
+ List<String> strList = Arrays.asList("......");
+ strList.forEach(
+        (Consumer<String>)LambdaMetafactory.metafactory(
+            null, null, null,
+            (Ljava/lang/Object;)V,
+                lambda$main$0(java.lang.String ),
+                (Ljava/lang/String;)V)()
+        );
+}
+
+private static void lambda$main$0(String s) {
+    System.out.println(s);
+}
+
+```
+
+执行时，会生成临时的匿名内部类，并编入调用代码
