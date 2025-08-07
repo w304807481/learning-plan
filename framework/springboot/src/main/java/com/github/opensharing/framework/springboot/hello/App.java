@@ -1,5 +1,6 @@
 package com.github.opensharing.framework.springboot.hello;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,9 +20,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 3.编写Rest
  *   在同级目录或子目录编写。否则需要其他注解配合
  *<p>
+ * 4.集成Mybatis（plus）增加@MapperScan注解，配置mapper目录
+ *<p>
  * @author jwen
  * Date 2020-09-09
  */
+@MapperScan(basePackages = "com.github.opensharing.framework.springboot.hello.dao")
 @SpringBootApplication
 public class App {
 

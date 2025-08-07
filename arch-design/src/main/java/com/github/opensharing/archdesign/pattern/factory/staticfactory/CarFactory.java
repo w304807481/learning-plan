@@ -1,5 +1,7 @@
 package com.github.opensharing.archdesign.pattern.factory.staticfactory;
 
+import com.github.opensharing.archdesign.pattern.factory.staticfactory.singleton.Car;
+
 /**
  * @author jwen
  */

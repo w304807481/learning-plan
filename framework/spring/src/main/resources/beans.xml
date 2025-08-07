@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="userController" class="com.github.opensharing.framework.spring.test.UserController">
+    <property name="userService" ref="userService"></property>
+  </bean>
+  <bean id="userService" class="com.github.opensharing.framework.spring.test.UserService">
+    <property name="config" value="123"></property>
+    <property name="userDao" ref="userDao"></property>
+  </bean>
+  <bean id="userDao" class="com.github.opensharing.framework.spring.test.UserDao">
+    <property name="limit" value="10000"></property>
+  </bean>
+</beans>

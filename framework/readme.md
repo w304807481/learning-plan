@@ -4,7 +4,7 @@
 
 ### ORM框架: Mybatis(ibatis, Mybatis Plus), Hibernate....
 
-### 微服务框架: SpringCloud（Netflix，Alibaba）, Dubbo(严格意义知识RPC框架)
+### 微服务框架: SpringCloud（Netflix，Alibaba）, Dubbo(严格意义只是RPC框架)
 
 ### 前后端分离: VUE系列
 

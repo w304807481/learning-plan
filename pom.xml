@@ -12,28 +12,6 @@
   <description>learning-plan</description>
   <url>https://github.com/w304807481/learning-plans</url>
 
-  <modules>
-    <module>language-base</module>
-    <module>framework</module>
-    <module>database</module>
-    <module>middleware</module>
-    <module>arch-design</module>
-    <module>tools</module>
-  </modules>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <commons.collections.version>3.2.2</commons.collections.version>
-    <commons-lang3.version>3.7</commons-lang3.version>
-    <guava.version>29.0-jre</guava.version>
-    <lombok.version>1.16.22</lombok.version>
-    <maven.model.version>3.6.0</maven.model.version>
-    <spring-boot-version>2.3.1.RELEASE</spring-boot-version>
-    <spring-cloud.version>Finchley.SR2</spring-cloud.version>
-    <gpg.executable>gpg</gpg.executable>
-  </properties>
-
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
@@ -56,30 +34,6 @@
     <url>https://github.com/w304807481/learning-plan/tree/master</url>
   </scm>
 
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>${spring-boot-version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.springframework.cloud</groupId>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <version>${spring-cloud.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>[4.13.1,)</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-
   <distributionManagement>
     <snapshotRepository>
       <id>oss</id>
@@ -90,40 +44,6 @@
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
-
-  <dependencies>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>${commons-lang3.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.guava</groupId>
-      <artifactId>guava</artifactId>
-      <version>${guava.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-      <version>${commons.collections.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-model</artifactId>
-      <version>${maven.model.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
 
   <build>
     <pluginManagement>
