@@ -1,11 +1,13 @@
 package com.github.opensharing.javabase.lambda;
 
+import java.io.PrintStream;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import com.github.opensharing.javabase.lambda.model.Tourist;
 import com.github.opensharing.javabase.lambda.model.User;
 
 /**
@@ -19,20 +21,47 @@ public class LambdaTester {
 
     public static void main(String[] args) {
 
-        //1.无参表达式
+        //0.基本用法
+        testBaseLambda();
         testNoArgsLambda();
 
-        //2.对象::实例方法
-        testMethodRefLambda();
-
-        //3.类::静态方法
+        //1.类::静态方法
         testClazzStaticMethodRefLambda();
 
-        //4.类::实例方法
+        //2.对象::实例方法
         testClazzInstanceMethodRefLambda();
+        testClazzInstanceMethodRefLambda2();
 
-        //5.无参的构造方法就是类::实例方法模型
+        //3.构造方法 类::new
         testClazzNoArgsConstructorRefLambda();
+        testClazzArgsConstructorRefLambda();
+
+        //4.子类引用父类方法
+        testSuperClazzMethodRefLambda();
+
+        //5.子类类引用自己方法
+        testThisClazzMethodRefLambda();
+
+        //6.引用数组构造
+        testArrayConstructorRefLambda();
+    }
+
+    /**
+     * 基础用法
+     */
+    private static void testBaseLambda() {
+        System.out.println("\n-------------------基本用法-----------------------\n");
+        CalculateOperator operator = new CalculateOperator() {
+
+            @Override
+            public int calc(int a, int b) {
+                return a + b;
+            }
+        };
+
+        operator = (x, y) -> x + y;
+
+        System.out.println(operator.calc(3, 5));
     }
 
     /**
@@ -55,15 +84,16 @@ public class LambdaTester {
     /**
      * 对象::实例方法
      */
-    public static void testMethodRefLambda() {
+    public static void testClazzInstanceMethodRefLambda2() {
         System.out.println("\n-------------------对象::实例方法-----------------------\n");
         List<User> list = UserFactory.buildUserList();
         Consumer<User> changeAge = e -> e.setAge(e.getAge() + 3);
         list.forEach(changeAge);
 
         //一般写法
+        PrintStream out = System.out;
         System.out.println("对象调用实例方法一般写法结果:");
-        list.forEach((x) -> System.out.println(x));
+        list.forEach((x) -> out.println(x));
 
         //简化写法
         System.out.println("对象调用实例方法简化写法结果:");
@@ -99,10 +129,10 @@ public class LambdaTester {
     }
 
     /**
-     * 无参的构造方法就是类::实例方法模型
+     * 无参的构造方法就是类::new
      */
     public static void testClazzNoArgsConstructorRefLambda() {
-        System.out.println("\n-------------------无参的构造方法就是类::实例方法模型----------------------\n");
+        System.out.println("\n-------------------无参的构造方法就是类::new----------------------\n");
         //一般写法
         Supplier<User> us = () -> new User();
         User user1 = us.get();
@@ -113,4 +143,51 @@ public class LambdaTester {
         User user2 = us2.get();
         System.out.println("无参的构造方法简化写法结果:" + user2);
     }
+
+    /**
+     * 有参的构造方法就是类::new
+     */
+    public static void testClazzArgsConstructorRefLambda() {
+        System.out.println("\n-------------------有参的构造方法就是类::new----------------------\n");
+        //一般写法
+        printTourist("老张", name -> new Tourist(name));
+
+        //简化写法
+        printTourist("老张", Tourist::new);
+    }
+
+    private static  void printTourist(String name, TouristBuilder touristBuilder) {
+        System.out.println(touristBuilder.build(name));
+    }
+
+    private interface TouristBuilder {
+        Tourist build(String name);
+    }
+
+    public static void testSuperClazzMethodRefLambda() {
+        System.out.println("\n-------------------super::method----------------------\n");
+        Tourist tourist = new Tourist("老张");
+        tourist.move();
+    }
+
+    public static void testThisClazzMethodRefLambda() {
+        System.out.println("\n-------------------this::method----------------------\n");
+        Tourist tourist = new Tourist("老张");
+        tourist.stay();
+    }
+
+    public static void testArrayConstructorRefLambda() {
+        System.out.println("\n--------------------数组构造 type[]::new---------------------\n");
+        int[] array = createArray(10, len -> {
+            return new int[len];
+        });
+        System.out.println(array.length);
+        array = createArray(10, int[] :: new);
+        System.out.println(array.length);
+    }
+
+    private static int[] createArray(int len, ArrayBuilder arrayBuilder) {
+        return arrayBuilder.build(len);
+    }
+
 }
