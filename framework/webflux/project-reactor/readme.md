@@ -48,3 +48,27 @@
  
 ### 14. 物化和非物化信号
 > ReactorTester.testFluxStreamMaterialize
+
+### 15. 错误处理
+
+### 16. 被压处理
+
+### 17. 热数据流和冷数据流
+
+### 18. 处理时间
+
+### 19. 组合和转化响应式流
+
+## 以编程方式创建流
+
+### push
+> ReactorTester2.testPush
+
+### create
+> ReactorTester2.testCreate
+
+### create
+> ReactorTester2.testGenerate
+
+### 包装disposable资源
+
