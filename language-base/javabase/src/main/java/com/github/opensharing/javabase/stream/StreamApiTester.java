@@ -1,8 +1,10 @@
 package com.github.opensharing.javabase.stream;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.github.opensharing.javabase.stream.model.User;
@@ -190,6 +192,19 @@ public class StreamApiTester {
      * collect方法以集合中的元素为基础，生成新的对象
      */
     private static void testCollectOfStreamApi() {
+        List<String>strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
+        List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
 
+        System.out.println("筛选列表: " + filtered);
+        String mergedString = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.joining(", "));
+        System.out.println("合并字符串: " + mergedString);
+    }
+
+    /**
+     * skip跳过一些记录
+     */
+    private static void testSkipOfStreamApi() {
+        String[] array = {"abc", "def", "ghi", "jkl"};
+        Stream.of(array).skip(2).forEach(System.out::println);
     }
 }
