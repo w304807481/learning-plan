@@ -53,7 +53,7 @@ public class Tourist extends Person {
         //一般写法
         this.move(() -> {
             //徒步
-            this.run();
+            super.run();
         });
 
         //简化写法
