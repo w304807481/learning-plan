@@ -4,12 +4,15 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;
 
+import reactor.core.publisher.ConnectableFlux;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -36,7 +39,12 @@ public class ReactorTester {
         //testFluxStreamFlatMap();
         //testFluxStreamSample();
         //testFluxStreamBlock();
-        testFluxStreamMaterialize();
+        //testFluxStreamMaterialize();
+        //testErrorHandling();
+        //testBackpressureHandling();
+        //testHotAndColdStreams();
+        //testTimeHandling();
+        //testStreamCombination();
     }
 
     /**
@@ -487,5 +495,136 @@ public class ReactorTester {
                 });
 
         Thread.sleep(2000);
+    }
+
+    /**
+     * 测试错误处理
+     */
+    public static void testErrorHandling() {
+        System.out.println("\n错误处理: onErrorReturn");
+        Flux.just(1, 2, 0, 4)
+                .map(i -> 10 / i)
+                .onErrorReturn(0) // 发生错误时返回默认值
+                .subscribe(System.out::println);
+
+        System.out.println("\n错误处理: onErrorResume");
+        Flux.just(1, 2, 0, 4)
+                .map(i -> 10 / i)
+                .onErrorResume(e -> Flux.just(-1, -2)) // 发生错误时切换到备用流
+                .subscribe(System.out::println);
+
+        System.out.println("\n错误处理: retry");
+        AtomicInteger counter = new AtomicInteger(0);
+        Flux.just(1, 2, 0, 4)
+                .map(i -> {
+                    if (counter.incrementAndGet() < 3) {
+                        return 10 / i;
+                    }
+                    return 0; // 第三次不触发错误
+                })
+                .retry(2) // 重试2次
+                .subscribe(System.out::println);
+    }
+
+    /**
+     * 测试背压处理
+     */
+    public static void testBackpressureHandling() throws InterruptedException {
+        System.out.println("\n背压处理: onBackpressureBuffer");
+        Flux.range(1, 100)
+                .onBackpressureBuffer(10) // 缓冲最多10个元素
+                .subscribe(System.out::println);
+
+        System.out.println("\n背压处理: onBackpressureDrop");
+        Flux.range(1, 100)
+                .onBackpressureDrop(dropped -> 
+                    System.out.println("Dropped: " + dropped)) // 打印被丢弃的元素
+                .subscribe(System.out::println);
+
+        System.out.println("\n背压处理: onBackpressureLatest");
+        Flux.range(1, 100)
+                .onBackpressureLatest() // 只保留最新元素
+                .subscribe(System.out::println);
+    }
+
+    /**
+     * 测试热数据流和冷数据流
+     */
+    public static void testHotAndColdStreams() throws InterruptedException {
+        System.out.println("\n冷数据流: 每个订阅者独立");
+        Flux<Integer> coldFlux = Flux.range(1, 3)
+                .delayElements(Duration.ofMillis(100));
+        
+        coldFlux.subscribe(i -> System.out.println("订阅者1: " + i));
+        Thread.sleep(200);
+        coldFlux.subscribe(i -> System.out.println("订阅者2: " + i));
+        
+        Thread.sleep(1000);
+
+        System.out.println("\n热数据流: ConnectableFlux");
+        ConnectableFlux<Integer> hotFlux = Flux.range(1, 5)
+                .delayElements(Duration.ofMillis(100))
+                .publish(); // 转换为热数据流
+        
+        hotFlux.subscribe(i -> System.out.println("订阅者1: " + i));
+        hotFlux.subscribe(i -> System.out.println("订阅者2: " + i));
+        
+        hotFlux.connect(); // 开始发射数据
+        Thread.sleep(1000);
+    }
+
+    /**
+     * 测试处理时间
+     */
+    public static void testTimeHandling() throws InterruptedException {
+        System.out.println("\n时间处理: timeout");
+        Flux.just(1, 2, 3)
+                .delayElements(Duration.ofMillis(200))
+                .timeout(Duration.ofMillis(150)) // 超时设置
+                .onErrorReturn(-1)
+                .subscribe(System.out::println);
+        
+        Thread.sleep(1000);
+
+        System.out.println("\n时间处理: delaySequence");
+        Flux.just(1, 2, 3)
+                .delaySequence(Duration.ofSeconds(1)) // 整体延迟
+                .subscribe(System.out::println);
+        
+        Thread.sleep(2000);
+
+        System.out.println("\n时间处理: elapsed");
+        Flux.just(1, 2, 3)
+                .delayElements(Duration.ofMillis(100))
+                .elapsed() // 计算时间间隔
+                .subscribe(tuple -> 
+                    System.out.println("耗时: " + tuple.getT1() + "ms, 值: " + tuple.getT2()));
+        
+        Thread.sleep(1000);
+    }
+
+    /**
+     * 测试组合和转化响应式流
+     */
+    public static void testStreamCombination() throws InterruptedException {
+        System.out.println("\n组合流: switchIfEmpty");
+        Flux.empty()
+                .switchIfEmpty(Flux.just(1, 2, 3)) // 空流时切换到备用流
+                .subscribe(System.out::println);
+
+        System.out.println("\n组合流: startWith");
+        Flux.just(4, 5, 6)
+                .startWith(Flux.just(1, 2, 3)) // 在流开始前添加元素
+                .subscribe(System.out::println);
+
+        System.out.println("\n组合流: transform");
+        Function<Flux<String>, Flux<String>> transformFunction = 
+            flux -> flux.map(String::toUpperCase).filter(s -> s.length() > 3);
+        
+        Flux.just("hello", "hi", "world")
+                .transform(transformFunction) // 应用转换函数
+                .subscribe(System.out::println);
+                
+        Thread.sleep(1000);
     }
 }
