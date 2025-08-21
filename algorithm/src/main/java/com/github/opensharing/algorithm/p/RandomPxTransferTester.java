@@ -3,7 +3,7 @@ package com.github.opensharing.algorithm.p;
 /**
  * 根据1-5 等概率函数f()， 求1-7等概率函数
  */
-public class RandomTransferTester {
+public class RandomPxTransferTester {
 
     public static void main(String[] args) {
 
