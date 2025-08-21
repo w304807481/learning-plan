@@ -1,4 +1,4 @@
-package com.github.opensharing.algorithm.random;
+package com.github.opensharing.algorithm.p;
 
 /**
  * 根据Math.random()，求x，x2等概率函数
