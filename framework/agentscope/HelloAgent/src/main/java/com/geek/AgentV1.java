@@ -10,7 +10,7 @@ import io.agentscope.core.tool.Toolkit;
 
 /**
  * Hello world!
- *
+ * 注意：在启动类中增加环境变量DASHSCOPE_API_KEY
  */
 public class AgentV1
 {
