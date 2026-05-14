@@ -1,6 +1,7 @@
 package com.geek;
 
 import com.geek.tools.WeatherTools;
+
 import io.agentscope.core.ReActAgent;
 import io.agentscope.core.message.Msg;
 import io.agentscope.core.message.MsgRole;
@@ -11,7 +12,7 @@ import io.agentscope.core.tool.Toolkit;
  * Hello world!
  *
  */
-public class App 
+public class AgentV1
 {
     public static void main( String[] args )
     {
