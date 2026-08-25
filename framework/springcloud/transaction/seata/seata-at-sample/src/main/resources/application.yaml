@@ -1,0 +1,55 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: seata-at-sample
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_sample?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+
+# =============================================
+# Seata 配置（AT 模式）
+# =============================================
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  tx-service-group: seata-at-sample
+
+  # 数据源代理模式：AT
+  data-source-proxy-mode: AT
+
+  # 服务发现 - 使用直连模式
+  registry:
+    type: file
+
+  # 配置
+  config:
+    type: file
+
+  # 直连 Seata Server 地址
+  service:
+    vgroup-mapping:
+      seata-at-sample: default
+    default.grouplist: 127.0.0.1:8091
+
+# =============================================
+# Actuator 配置
+# =============================================
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+# =============================================
+# 日志配置
+# =============================================
+logging:
+  level:
+    io.seata: DEBUG

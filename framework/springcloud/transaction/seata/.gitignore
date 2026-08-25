@@ -1,0 +1,17 @@
+# Maven 构建产物
+**/target/
+*.jar
+!*/src/**
+
+# TC(seata-server) file存储模式运行期数据
+**/sessionStore/
+**/file_store/
+
+# 日志
+**/*.log
+nohup.out
+
+# IDE
+.idea/
+*.iml
+.DS_Store
