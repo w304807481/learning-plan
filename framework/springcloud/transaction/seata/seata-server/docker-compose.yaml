@@ -1,0 +1,50 @@
+services:
+  seata-server:
+    image: apache/seata-server:2.3.0
+    container_name: seata-server
+    # ⚠️ 2.3.0镜像使用Spring Boot application.yml作为主配置（不是旧版registry.conf）。
+    #    以下 ENV 直接覆盖 application.yml 的 seata.* 配置项，优先级最高。
+    #    参考镜像内 /seata-server/resources/application.yml。
+    environment:
+      # ================ 存储 ================
+      - STORE_MODE=file
+      - SEATA_STORE_MODE=file
+
+      # ================ 注册中心（TC把自己注册到Nacos，Client可从Nacos发现TC地址） ================
+      - SEATA_REGISTRY_TYPE=nacos
+      # 两容器同属一个Docker bridge网络（opensabre），直接用容器名DNS互通
+      - SEATA_REGISTRY_NACOS_SERVER_ADDR=opensabre-rnacos:8848
+      - SEATA_REGISTRY_NACOS_NAMESPACE=
+      - SEATA_REGISTRY_NACOS_GROUP=DEFAULT_GROUP
+      - SEATA_REGISTRY_NACOS_CLUSTER=default
+      - SEATA_REGISTRY_NACOS_USERNAME=nacos
+      - SEATA_REGISTRY_NACOS_PASSWORD=nacos
+      - SEATA_REGISTRY_NACOS_APPLICATION=seata-server         # 在Nacos服务列表中显示的服务名
+
+      # ================ 配置中心（TC从Nacos读取seataServer.properties） ================
+      - SEATA_CONFIG_TYPE=nacos
+      - SEATA_CONFIG_NACOS_SERVER_ADDR=opensabre-rnacos:8848
+      - SEATA_CONFIG_NACOS_NAMESPACE=
+      - SEATA_CONFIG_NACOS_GROUP=DEFAULT_GROUP
+      - SEATA_CONFIG_NACOS_USERNAME=nacos
+      - SEATA_CONFIG_NACOS_PASSWORD=nacos
+      - SEATA_CONFIG_NACOS_DATA_ID=seataServer.properties
+
+    ports:
+      - "8091:8091"
+      - "7091:7091"
+
+    # ───────────────────────────────────────────────────────────
+    # ✅ 最可靠的跨compose容器互通方案：把seata-server加入rnacos现有的 opensabre 网络
+    #    这样容器间直接通过容器名 opensabre-rnacos 做DNS解析，
+    #    不依赖宿主机IP变化、不依赖IPv6，也不需要手动 docker network connect
+    #    如果将来想改为单容器调试，把这段 networks 删除即可。
+    # ───────────────────────────────────────────────────────────
+    networks:
+      - default
+      - opensabre
+
+networks:
+  # 引用 rnacos 所在 compose 项目已经预先创建好的同名 bridge 网络
+  opensabre:
+    external: true
